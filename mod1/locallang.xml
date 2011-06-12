@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;txrecordsmanagerM1&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title">Edit</label>
+			<label index="choose">Choose an action :</label>
+            <label index="norecords">No available data</label>
+            <label index="areyousure">Are you sure that you want to delete this record ?</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="title">Modifier</label>
+			<label index="choose">Choisir une action :</label>
+            <label index="norecords">Aucune donnée disponible</label>
+            <label index="areyousure">Etes-vous sur de vouloir supprimer cet enregistrement ?</label>
+		</languageKey>
+	</data>
+</T3locallang>
