@@ -205,7 +205,7 @@ class tx_recordsmanager_module3 extends t3lib_SCbase
 
 	function exportToXML($query) {
 		global $LANG;
-		$xmlData = tx_t3devapi_export::exportRecordsToXML($query);
+		$xmlData = $this->exportRecordsToXML($query);
 		$content = '';
 		$content .= '<br/><input type="submit" name="downloadxml" value="' . sprintf($LANG->getLL('download'), 'XML') . '" onClick="window.location.href=\'index.php\';"><br />';
 
@@ -230,13 +230,12 @@ class tx_recordsmanager_module3 extends t3lib_SCbase
 
 		if (t3lib_div::_GP('downloadcsv')) {
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUPBY'], $query['ORDERBY'], $query['LIMIT']);
-			$records = t3lib_div::makeInstance('tx_t3devapi_database');
 			if ($query['FROM'] == 'tx_powermail_mails') {
 				$convertData = FALSE;
 			} else {
 				$convertData = TRUE;
 			}
-			$rows = $records->getAllResults($res, $query['FROM'], $convertData);
+			$rows = $this->getAllResults($res, $query['FROM'], $convertData);
 
 			foreach ($rows as $row) {
 				$rowArr [] = t3lib_div::csvValues($row);
@@ -263,13 +262,12 @@ class tx_recordsmanager_module3 extends t3lib_SCbase
 
 		if (t3lib_div::_GP('downloadexcel')) {
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUPBY'], $query['ORDERBY'], $query['LIMIT']);
-			$records = t3lib_div::makeInstance('tx_t3devapi_database');
 			if ($query['FROM'] == 'tx_powermail_mails') {
 				$convertData = FALSE;
 			} else {
 				$convertData = TRUE;
 			}
-			$rows = $records->getAllResults($res, $query['FROM'], $convertData);
+			$rows = $this->getAllResults($res, $query['FROM'], $convertData);
 
 			// TODO : process a powermail table
 			/*if ($query['FROM'] == 'tx_powermail_mails') {
@@ -353,21 +351,20 @@ class tx_recordsmanager_module3 extends t3lib_SCbase
 	}
 
 	function formatAllResults($res, $table, $title) {
-		$api = t3lib_div::makeInstance('tx_t3devapi_database');
 		$content = '';
-		$content .= tx_t3devapi_befunc::drawDBListTitle($title);
+		$content .= $this->drawDBListTitle($title);
 		$first = 1;
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 			if ($first) {
 				$first = 0;
-				$headers = $api->getResultRowTitles($row, $table);
-				$content .= tx_t3devapi_befunc::drawDBListHeader($headers);
+				$headers = $this->getResultRowTitles($row, $table);
+				$content .= $this->drawDBListHeader($headers);
 			}
-			$records = $api->getResultRow($row, $table);
-			$content .= tx_t3devapi_befunc::drawDBListRows($records);
+			$records = $this->getResultRow($row, $table);
+			$content .= $this->drawDBListRows($records);
 		}
 		$content .= '</table>';
-		return tx_t3devapi_befunc::drawDBListTable($content);
+		return $this->drawDBListTable($content);
 	}
 
 	function renderListNavigation($totalItems, $iLimit, $firstElementNumber, $alwaysShow = false) {
@@ -456,6 +453,122 @@ class tx_recordsmanager_module3 extends t3lib_SCbase
 		$returnContent = $content;
 
 		return $returnContent;
+	}
+
+	/**
+	 * drawDBListTable
+	 *
+	 * @param  $content
+	 * @return string
+	 */
+
+	function drawDBListTable($content) {
+		return '<table cellspacing="1" cellpadding="2" border="0" class="typo3-dblist">' . $content . '</table>';
+	}
+
+	/**
+	 * drawDBListTitle
+	 *
+	 * @param  $content
+	 * @param int $colspan
+	 * @return string
+	 */
+
+	function drawDBListTitle($content, $colspan = 100) {
+		return '<tr class="t3-row-header"><td colspan="' . $colspan . '">' . $content . '</td></tr>';
+	}
+
+	/**
+	 * drawDBListHeader
+	 *
+	 * @param  $headers
+	 * @return string
+	 */
+
+	function drawDBListHeader($headers) {
+		$content = '';
+		$content .= '<tr class="c-headLine">';
+		foreach ($headers as $header) {
+			$content .= '<td class="cell">' . $header . '</td>';
+		}
+		$content .= '</tr>';
+		return $content;
+	}
+
+	/**
+	 * drawDBListRows
+	 *
+	 * @param  $rows
+	 * @return string
+	 */
+
+	function drawDBListRows($rows) {
+		$content = '';
+		$content .= '<tr class="db_list_normal">';
+		foreach ($rows as $row) {
+			$content .= '<td class="cell">' . $row . '</td>';
+		}
+		$content .= '</tr>';
+		return $content;
+	}
+
+	/**
+	 * Get all the data according to the TCA (time,relation, etc...) from a sql ressource.
+	 *
+	 * @param  $res
+	 * @param  $table
+	 * @return array
+	 */
+
+	function getAllResults($res, $table, $convertData = true) {
+		$first = 1;
+		$recordList = array();
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			if ($first) {
+				$first = 0;
+				$recordList [] = self::getResultRowTitles($row, $table);
+			}
+			if ($convertData === true) {
+				$recordList [] = self::getResultRow($row, $table);
+			} else {
+				$recordList [] = $row;
+			}
+		}
+		$GLOBALS['TYPO3_DB']->sql_free_result($res);
+		return $recordList;
+	}
+
+	function getResultRowTitles($row, $table) {
+		global $TCA;
+		$tableHeader = array();
+		$conf = $TCA[$table];
+		foreach ($row as $fieldName => $fieldValue) {
+			$title = $GLOBALS['LANG']->sL($conf['columns'][$fieldName]['label'] ? $conf['columns'][$fieldName]['label'] : $fieldName, 1);
+			$tableHeader[$fieldName] = $title;
+		}
+		return $tableHeader;
+	}
+
+	function getResultRow($row, $table) {
+		$record = array();
+		foreach ($row as $fieldName => $fieldValue) {
+			if ((TYPO3_MODE == 'FE')) {
+				$GLOBALS['TSFE']->includeTCA();
+			}
+			$record[$fieldName] = t3lib_BEfunc::getProcessedValueExtra($table, $fieldName, $fieldValue, 0, $row['uid']);
+		}
+		return $record;
+	}
+
+	function exportRecordsToXML($query) {
+		$xmlObj = t3lib_div::makeInstance('t3lib_xml', 'typo3_export');
+		$xmlObj->setRecFields($query['FROM'], $query['SELECT']);
+		$xmlObj->renderHeader();
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUPBY'], $query['ORDERBY'], $query['LIMIT']);
+		$xmlObj->renderRecords($query['FROM'], $res);
+		$xmlObj->renderFooter();
+		$GLOBALS['TYPO3_DB']->sql_free_result($res);
+		return $xmlObj->getResult();
 	}
 
 }

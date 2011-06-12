@@ -13,9 +13,9 @@
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Records management in a BE module',
 	'description' => 'Add modules to easily manage your records (insert, edit & export) in one place.',
-	'category' => '',
-	'author' => '',
-	'author_email' => '',
+	'category' => 'module',
+	'author' => 'CERDAN Yohann [Site-nGo]',
+	'author_email' => 'cerdanyohann@yahoo.fr',
 	'shy' => '',
 	'dependencies' => '',
 	'conflicts' => '',
