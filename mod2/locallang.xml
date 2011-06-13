@@ -27,5 +27,16 @@
 			<label index="selectpid">Selectionner une page où insérer un enregistrement : </label>
             <label index="norecords">Aucune donnée disponible</label>
 		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="title">Dodaj</label>
+			<label index="choose">Wybierz akcję :</label>
+			<label index="addrecords">Następujące strony w linii root zawierają rekordy :</label>
+			<label index="storage">Foldery przechowujące rekordy</label>
+			<label index="storageadmin">Foldery przechowujące rekordy zdefiniowane przez administratora</label>
+			<label index="datas">Liczba</label>
+			<label index="pid">PID</label>
+			<label index="selectpid">Wybierz folder strony, do którego chcesz dodać rekord : </label>
+            <label index="norecords">Brak dostępnych danych</label>
+		</languageKey>		
 	</data>
 </T3locallang>

@@ -15,5 +15,10 @@
 			<label index="mlang_labels_tabdescr">Modifier</label>
 			<label index="mlang_labels_tablabel">Modifier</label>
 		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="mlang_tabs_tab">Edycja</label>
+			<label index="mlang_labels_tabdescr">Edycja</label>
+			<label index="mlang_labels_tablabel">Edycja</label>
+		</languageKey>		
 	</data>
 </T3locallang>

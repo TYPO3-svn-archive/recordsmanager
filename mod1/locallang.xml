@@ -17,5 +17,11 @@
             <label index="norecords">Aucune donnée disponible</label>
             <label index="areyousure">Etes-vous sur de vouloir supprimer cet enregistrement ?</label>
 		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="title">Edycja</label>
+			<label index="choose">Wybierz akcję :</label>
+            <label index="norecords">Brak dostępnych danych</label>
+            <label index="areyousure">Jesteś pewny, że chcesz usunąć ten rekord ?</label>
+		</languageKey>		
 	</data>
 </T3locallang>

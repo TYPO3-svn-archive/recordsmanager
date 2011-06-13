@@ -15,5 +15,10 @@
 			<label index="mlang_labels_tabdescr">Exporter</label>
 			<label index="mlang_labels_tablabel">Exporter</label>
 		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="mlang_tabs_tab">Eksport</label>
+			<label index="mlang_labels_tabdescr">Eksport</label>
+			<label index="mlang_labels_tablabel">Eksport</label>
+		</languageKey>		
 	</data>
 </T3locallang>

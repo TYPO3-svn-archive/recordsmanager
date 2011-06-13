@@ -51,5 +51,28 @@
 			<label index="tx_recordsmanager_config.insertdefaultpid">Surcharger les PID possibles</label>
 			<label index="tx_recordsmanager_config.insertchoosepid">Autoriser le choix de pid</label>
 		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="tx_recordsmanager_config">Konfiguracja menedżera rekordów</label>
+			<label index="tx_recordsmanager_config.title">Tytuł konfiguracji</label>
+			<label index="tx_recordsmanager_config.type">Rodzaj konfiguracji</label>
+			<label index="tx_recordsmanager_config.type.I.0">Edytuj</label>
+			<label index="tx_recordsmanager_config.type.I.1">Dodaj</label>
+			<label index="tx_recordsmanager_config.type.I.2">Eksportuj</label>
+			<label index="tx_recordsmanager_config.sqltable">Tabela do utworzenia listy (zapisz aby odświeżyć listę pól)</label>
+			<label index="tx_recordsmanager_config.sqlfields">Pola tabeli do wyświetlenia w trybie listy</label>
+			<label index="tx_recordsmanager_config.sqlfieldsinsert">Pola tabeli do wyświetlenia w trybie edycji/dodawania</label>
+			<label index="tx_recordsmanager_config.extrawhere">Dodatkowy warunek WHERE (AND xxx)</label>
+			<label index="tx_recordsmanager_config.extragroupby">Dodatkowa klauzula GROUP BY</label>
+			<label index="tx_recordsmanager_config.extraorderby">Dodatkowa klauzula ORDER BY</label>
+			<label index="tx_recordsmanager_config.extralimit">Dodatkowa klauzula LIMIT</label>
+			<label index="tx_recordsmanager_config.exportmode">Rodzaj eksportu</label>
+			<label index="tx_recordsmanager_config.exportmode.I.0">Normalny</label>
+			<label index="tx_recordsmanager_config.exportmode.I.1">XML</label>
+			<label index="tx_recordsmanager_config.exportmode.I.2">CSV</label>
+			<label index="tx_recordsmanager_config.exportmode.I.3">EXCEL</label>
+			<label index="tx_recordsmanager_config.permsgroup">Wyświetlaj tylko dla tych grup (be_group)</label>
+			<label index="tx_recordsmanager_config.insertdefaultpid">Rozszerz listę dostępnych wartości PID</label>
+			<label index="tx_recordsmanager_config.insertchoosepid">Pozwól na wybór wartości PID</label>
+		</languageKey>	
 	</data>
 </T3locallang>

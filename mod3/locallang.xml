@@ -27,5 +27,16 @@
             <label index="download">Cliquer pour télécharger le fichier au format %s</label>
             <label index="norecords">Aucune donnée disponible</label>
         </languageKey>
+        <languageKey index="pl" type="array">
+            <label index="title">Eksport</label>
+            <label index="choose">Wybierz akcję :</label>
+            <label index="addrecords">Następujące strony w linii root zawierają rekordy :</label>
+            <label index="storage">Foldery przechowujące rekordy</label>
+            <label index="datas">Dane</label>
+            <label index="pid">PID</label>
+            <label index="selectpid">Wybierz folder, do którego chcesz dodać nowy rekord :</label>
+            <label index="download">Kliknij aby pobrać plik w formacie %s</label>
+            <label index="norecords">Brak dostępnych danych</label>
+        </languageKey>
     </data>
 </T3locallang>

@@ -15,5 +15,10 @@
 			<label index="mlang_labels_tabdescr">Gestion des enregistrements</label>
 			<label index="mlang_labels_tablabel">Gestion des enregistrements</label>
 		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="mlang_tabs_tab">Menedżer rekordów</label>
+			<label index="mlang_labels_tabdescr">Menedżer rekordów</label>
+			<label index="mlang_labels_tablabel">Menedżer rekordów</label>
+		</languageKey>		
 	</data>
 </T3locallang>
