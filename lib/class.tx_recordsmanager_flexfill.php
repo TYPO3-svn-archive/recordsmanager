@@ -2,6 +2,7 @@
 
 class tx_recordsmanager_flexfill
 {
+	// List of exclude fields that are not process in insert/edit view
 	public $excludeFields = 'uid,pid,deleted,t3ver_oid,t3ver_id,t3ver_wsid,t3ver_label,t3ver_state,t3ver_stage,t3ver_count,t3ver_tstamp,t3ver_move_id,t3_origuid,l18n_parent,l18n_diffsource';
 
 	public function getFields(&$params, &$fObj) {
@@ -17,6 +18,10 @@ class tx_recordsmanager_flexfill
 			}
 		}
 	}
+
+	/**
+	 * Get TCA description of a table
+	 */
 
 	public function getTableTCA($table) {
 		global $TCA;
