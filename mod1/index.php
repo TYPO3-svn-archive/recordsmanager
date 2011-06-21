@@ -93,6 +93,10 @@ class tx_recordsmanager_module1 extends t3lib_SCbase
 		$this->doc->form = '<form action="" method="post" enctype="multipart/form-data">';
 		// JavaScript
 		$returnUrl = rawurlencode('mod.php?M=txrecordsmanagerM1_edit');
+		$jumpToUrl = 'tce_db.php?cmd["+table+"]["+id+"][delete]=1&redirect=' . $returnUrl . '&vC=' . $BE_USER->veriCode() . '&prErr=1&uPT=1';
+		if (t3lib_div::int_from_ver(TYPO3_version) >= 4005000) {
+			$jumpToUrl .= t3lib_BEfunc::getUrlToken('tceAction');
+		}
 		$this->doc->JScode = '
 			<script language="javascript" type="text/javascript">
 			script_ended = 0;
@@ -102,7 +106,7 @@ class tx_recordsmanager_module1 extends t3lib_SCbase
 
 			function deleteRecord(table,id)	{	//
 				if (confirm(' . $LANG->JScharCode($LANG->getLL('areyousure')) . '))	{
-					jumpToUrl("tce_db.php?cmd["+table+"]["+id+"][delete]=1&redirect=' . $returnUrl . '&vC=' . $BE_USER->veriCode() . '&prErr=1&uPT=1");
+					jumpToUrl("' . $jumpToUrl . '");
 				}
 				return false;
 			}
